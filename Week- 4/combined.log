@@ -1,2 +1,16 @@
 {"level":"error","message":"n2 is incorrectly defined","service":"calculate-service"}
 {"level":"info","message":"Parameters 786 and 10 received for addition","service":"calculate-service"}
+{"level":"info","message":"Exponentiation: 2 raised to the power of 3 is 8","service":"calculate-service"}
+{"level":"info","message":"Exponentiation: 10 raised to the power of 3 is 1000","service":"calculate-service"}
+{"level":"info","message":"Square Root: Square root of 16 is 4","service":"calculate-service"}
+{"level":"info","message":"Square Root: Square root of 16 is 4","service":"calculate-service"}
+{"level":"info","message":"Square Root: Square root of 120933 is 347.75422355450985","service":"calculate-service"}
+{"level":"info","message":"Modulo: 10 modulo 3 is 1","service":"calculate-service"}
+{"level":"info","message":"Modulo: 10909 modulo 50 is 9","service":"calculate-service"}
+{"level":"info","message":"Modulo: 10909 modulo 50 is 9","service":"calculate-service"}
+{"level":"info","message":"Modulo: 10909 modulo 50 is 9","service":"calculate-service"}
+{"level":"info","message":"Modulo: 10909 modulo 5 is 4","service":"calculate-service"}
+{"level":"info","message":"Modulo: 10 modulo 5 is 0","service":"calculate-service"}
+{"level":"info","message":"Modulo: 101 modulo 5 is 1","service":"calculate-service"}
+{"level":"info","message":"Square Root: Square root of 16 is 4","service":"calculate-service"}
+{"level":"error","message":"Square Root Error: Invalid input. Input must be numeric.","service":"calculate-service"}

@@ -1,0 +1,102 @@
+const express = require("express");
+const winston = require('winston');
+
+// Initialize Winston logger
+const logger = winston.createLogger({
+    level: 'info',
+    format: winston.format.json(),
+    defaultMeta: { service: 'calculate-service' },
+    transports: [
+        new winston.transports.File({ filename: 'error.log', level: 'error' }),
+        new winston.transports.File({ filename: 'combined.log' })
+    ]
+});
+
+if (process.env.NODE_ENV !== 'production') {
+    logger.add(new winston.transports.Console({
+        format: winston.format.simple()
+    }));
+}
+
+const app = express();
+
+// Addition Function
+const add = (n1, n2) => {
+    return n1 + n2;
+}
+
+// Exponentiation Operation
+app.get("/power", (req, res) => {
+    try {
+        const base = parseFloat(req.query.base);
+        const exponent = parseFloat(req.query.exponent);
+
+        if (isNaN(base) || isNaN(exponent)) {
+            throw new Error("Invalid input. Both base and exponent must be numeric.");
+        }
+
+        const result = Math.pow(base, exponent);
+
+        // Log successful operation
+        logger.info(`Exponentiation: ${base} raised to the power of ${exponent} is ${result}`);
+
+        res.status(200).json({ statuscode: 200, data: result });
+    } catch (error) {
+        // Log error
+        logger.error(`Exponentiation Error: ${error.message}`);
+
+        res.status(500).json({ statuscode: 500, msg: error.message });
+    }
+});
+
+// Square Root Operation
+app.get("/sqrt", (req, res) => {
+    try {
+        const number = parseFloat(req.query.number);
+
+        if (isNaN(number)) {
+            throw new Error("Invalid input. Input must be numeric.");
+        }
+
+        const result = Math.sqrt(number);
+
+        // Log successful operation
+        logger.info(`Square Root: Square root of ${number} is ${result}`);
+
+        res.status(200).json({ statuscode: 200, data: result });
+    } catch (error) {
+        // Log error
+        logger.error(`Square Root Error: ${error.message}`);
+
+        res.status(500).json({ statuscode: 500, msg: error.message });
+    }
+});
+
+// Modulo Operation
+app.get("/modulo", (req, res) => {
+    try {
+        const dividend = parseFloat(req.query.dividend);
+        const divisor = parseFloat(req.query.divisor);
+
+        if (isNaN(dividend) || isNaN(divisor) || divisor === 0) {
+            throw new Error("Invalid input. Both dividend and divisor must be non-zero numeric values.");
+        }
+
+        const result = dividend % divisor;
+
+        // Log successful operation
+        logger.info(`Modulo: ${dividend} modulo ${divisor} is ${result}`);
+
+        res.status(200).json({ statuscode: 200, data: result });
+    } catch (error) {
+        // Log error
+        logger.error(`Modulo Error: ${error.message}`);
+
+        res.status(500).json({ statuscode: 500, msg: error.message });
+    }
+});
+
+const port = 3040;
+app.listen(port, () => {
+    console.log("Server is running on port " + port);
+});
